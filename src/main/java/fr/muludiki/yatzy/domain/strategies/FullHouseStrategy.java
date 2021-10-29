@@ -1,7 +1,7 @@
 package fr.muludiki.yatzy.domain.strategies;
 
 import fr.muludiki.yatzy.domain.PlayerSet;
-import java.util.stream.Stream;
+import java.util.stream.IntStream;
 
 /**
  * Si les dés sont un carre et un brelan, le joueur marque la somme de tous les dés.
@@ -19,13 +19,15 @@ class FullHouseStrategy implements ScoreStrategy {
 
     @Override
     public int compute(PlayerSet playerSet) {
-        int pairs = Stream.of(1, 2, 3, 4, 5, 6)
-                .filter(integer -> playerSet.getCountDiceByValue()[integer - 1] == PAIR)
-                .findFirst().orElse(0);
+        int pairs = IntStream.range(1, 7)
+            .filter(integer -> playerSet.getCountDiceByValue()[integer - 1] == PAIR)
+            .findFirst()
+            .orElse(0);
 
-        int threes = Stream.of(1, 2, 3, 4, 5, 6)
-                .filter(integer -> playerSet.getCountDiceByValue()[integer - 1] == THREES)
-                .findFirst().orElse(0);
+        int threes = IntStream.range(1, 7)
+            .filter(integer -> playerSet.getCountDiceByValue()[integer - 1] == THREES)
+            .findFirst()
+            .orElse(0);
 
         return pairs > 0 && threes > 0 ? pairs * 2 + threes * 3 : FULL_HOUSE_NO_SCORE;
     }

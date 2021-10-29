@@ -3,7 +3,7 @@ package fr.muludiki.yatzy.domain.strategies;
 import fr.muludiki.yatzy.domain.PlayerSet;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.util.stream.IntStream;
 
 /**
  * S'il y a deux paires de dés avec le même numéro,
@@ -20,9 +20,10 @@ class TwoPairStrategy implements ScoreStrategy {
 
     @Override
     public int compute(PlayerSet playerSet) {
-        List<Integer> pairs = Stream.of(1, 2, 3, 4, 5, 6)
-                .filter(integer -> playerSet.getCountDiceByValue()[integer - 1] >= PAIR)
-                .collect(Collectors.toList());
+        List<Integer> pairs = IntStream.range(1, 7)
+            .filter(integer -> playerSet.getCountDiceByValue()[integer - 1] >= PAIR)
+            .boxed()
+            .collect(Collectors.toList());
 
         return pairs.size() == PAIR ? pairs.stream().reduce(0, (a, b) -> a + b * 2) : TWO_PAIR_NO_SCORE;
     }

@@ -22,4 +22,16 @@
 # PlayerSet 
 * deplace certaines methodes de calcul dans l'objet qui peut porter cette responsabilité
 
+# suppression de la factory
+* utilisation de la map pour determiner la category
+* suppression des optional => fail fast : si category inconnu jete erreur
+* fix acceptance test : nom des categories suites incorrect.
+
 # Factorisation des X of a kind en une strategie
+
+# strategy
+* Utilise intStream 
+
+# TODO - NEXT 
+* Test de toutes les nouvelles classes, methodes créés ou déplacées...
+* Une partie de l'algo du full, 2 pair et XOfAKind doit etre factorisable. tjrs le meme pattern stream.filter.xx.orElese

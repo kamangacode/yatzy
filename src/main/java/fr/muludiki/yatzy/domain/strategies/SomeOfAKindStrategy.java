@@ -1,7 +1,7 @@
 package fr.muludiki.yatzy.domain.strategies;
 
 import fr.muludiki.yatzy.domain.PlayerSet;
-import java.util.stream.Stream;
+import java.util.stream.IntStream;
 
 class SomeOfAKindStrategy implements ScoreStrategy {
 
@@ -15,9 +15,9 @@ class SomeOfAKindStrategy implements ScoreStrategy {
 
   @Override
   public int compute(PlayerSet playerSet) {
-    return Stream.of(1, 2, 3, 4, 5, 6)
+    return IntStream.range(1, 7)
         .filter(integer -> playerSet.getCountDiceByValue()[integer - 1] >= value)
-        .mapToInt(diceValue -> diceValue * value)
+        .map(diceValue -> diceValue * value)
         .max()
         .orElse(MISSED_X_OF_A_KIND);
   }

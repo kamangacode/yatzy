@@ -1,8 +1,7 @@
 package fr.muludiki.yatzy.domain.strategies;
 
 import fr.muludiki.yatzy.domain.PlayerSet;
-
-import java.util.stream.Stream;
+import java.util.stream.IntStream;
 
 /**
  * Lorsqu'il est placé sur « grande suite », si les dés indiquent
@@ -18,8 +17,9 @@ class LargeStraightStrategy implements ScoreStrategy {
 
     @Override
     public int compute(PlayerSet playerSet) {
-       return Stream.of(2, 3, 4, 5,6).filter(integer -> playerSet.getCountDiceByValue()[integer-1] == 1).count() == 5
-            ? LARGE_STRAIGHT_SCORE : LARGE_STRAIGHT_NO_SCORE;
+       return IntStream.range(2, 7)
+           .filter(integer -> playerSet.getCountDiceByValue()[integer-1] == 1)
+           .count() == 5
+           ? LARGE_STRAIGHT_SCORE : LARGE_STRAIGHT_NO_SCORE;
     }
-
 }
