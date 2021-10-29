@@ -1,17 +1,18 @@
 package unit;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import acceptance.adapter.InMemoryContext;
 import fr.muludiki.yatzy.domain.Player;
 import fr.muludiki.yatzy.domain.PlayerSet;
 import fr.muludiki.yatzy.domain.context.PlayerContext;
 import fr.muludiki.yatzy.domain.strategies.StrategyScoreType;
 import fr.muludiki.yatzy.usecase.PlayYatzi;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-
-import static org.junit.Assert.assertEquals;
 
 public class PlayYatziTest {
 
@@ -19,7 +20,7 @@ public class PlayYatziTest {
     private Player brigitte;
     private PlayYatzi sut;
 
-    @Before
+    @BeforeEach
     public void before(){
         playerContext.initAvailableCategories();
         brigitte = new Player("bgi","brigitte",0);
@@ -72,20 +73,22 @@ public class PlayYatziTest {
         assertEquals(0, brigitte.getScore());
     }
 
-
     @ParameterizedTest
     @CsvSource({
-            "1, 2, 1, 3, 6,     2",
-            "3, 2, 4, 3, 6,     0"
-
+        "1, 2, 1, 3, 6,     2",
+        "1, 2, 1, 3, 1,     3",
+        "1, 2, 5, 3, 6,     1",
+        "3, 2, 4, 3, 6,     0",
+        "1, 2, 1, 3, 6,     2",
     })
     public void shouldPlayYatziWithOnesCategory(final int die1, final int die2, final int die3,
-                                                final int die4, final int die5, final int expected){
+        final int die4, final int die5, final int expected){
         //Given
-        PlayerSet set = getPlayerSet(die1, die2, die3, die4, die5);
+        PlayerSet set = new PlayerSet(die1, die2, die3, die4, die5);
+        playerContext.setCurrentPlayer(brigitte);
+        playerContext.setCurrentSet(set);
 
         //When
-        sut = getPlayYatzi(playerContext);
         sut.play(brigitte,set,StrategyScoreType.CATEGORY_ONES.getType());
 
         //Then
@@ -94,20 +97,20 @@ public class PlayYatziTest {
 
     @ParameterizedTest
     @CsvSource({
-            "1, 2, 1, 2, 6,     4",
-            "1, 2, 1, 3, 1,     2",
-            "1, 2, 5, 2, 2,     6",
-            "3, 6, 4, 3, 6,     0",
-            "2, 2, 2, 2, 6,     8",
-
+        "1, 2, 1, 2, 6,     4",
+        "1, 2, 1, 3, 1,     2",
+        "1, 2, 5, 2, 2,     6",
+        "3, 6, 4, 3, 6,     0",
+        "2, 2, 2, 2, 6,     8",
     })
     public void shouldPlayYatziWithTwosCategory(final int die1, final int die2, final int die3,
-                                                final int die4, final int die5, final int expected){
+        final int die4, final int die5, final int expected){
         //Given
-        PlayerSet set = getPlayerSet(die1, die2, die3, die4, die5);
+        PlayerSet set = new PlayerSet(die1, die2, die3, die4, die5);
+        playerContext.setCurrentPlayer(brigitte);
+        playerContext.setCurrentSet(set);
 
         //When
-        sut = getPlayYatzi(playerContext);
         sut.play(brigitte,set,StrategyScoreType.CATEGORY_TWOS.getType());
 
         //Then
@@ -116,20 +119,20 @@ public class PlayYatziTest {
 
     @ParameterizedTest
     @CsvSource({
-            "1, 3, 1, 2, 6,     3",
-            "1, 2, 3, 3, 1,     6",
-            "1, 2, 5, 2, 2,     0",
-            "3, 3, 4, 3, 6,     9",
-            "3, 3, 3, 3, 6,     12",
-
+        "1, 3, 1, 2, 6,     3",
+        "1, 2, 3, 3, 1,     6",
+        "1, 2, 5, 2, 2,     0",
+        "3, 3, 4, 3, 6,     9",
+        "3, 3, 3, 3, 6,     12",
     })
     public void shouldPlayYatziWithThreesCategory(final int die1, final int die2, final int die3,
-                                                final int die4, final int die5, final int expected){
+        final int die4, final int die5, final int expected){
         //Given
-        PlayerSet set = getPlayerSet(die1, die2, die3, die4, die5);
+        PlayerSet set = new PlayerSet(die1, die2, die3, die4, die5);
+        playerContext.setCurrentPlayer(brigitte);
+        playerContext.setCurrentSet(set);
 
         //When
-        sut = getPlayYatzi(playerContext);
         sut.play(brigitte,set,StrategyScoreType.CATEGORY_THREES.getType());
 
         //Then
@@ -138,20 +141,20 @@ public class PlayYatziTest {
 
     @ParameterizedTest
     @CsvSource({
-            "1, 3, 1, 2, 4,     4",
-            "1, 2, 3, 4, 4,     8",
-            "1, 2, 4, 4, 4,     12",
-            "3, 3, 5, 3, 6,     0",
-            "3, 4, 4, 4, 4,     16",
-
+        "1, 3, 1, 2, 4,     4",
+        "1, 2, 3, 4, 4,     8",
+        "1, 2, 4, 4, 4,     12",
+        "3, 3, 5, 3, 6,     0",
+        "3, 4, 4, 4, 4,     16",
     })
     public void shouldPlayYatziWithFoursCategory(final int die1, final int die2, final int die3,
-                                                  final int die4, final int die5, final int expected){
+        final int die4, final int die5, final int expected){
         //Given
-        PlayerSet set = getPlayerSet(die1, die2, die3, die4, die5);
+        PlayerSet set = new PlayerSet(die1, die2, die3, die4, die5);
+        playerContext.setCurrentPlayer(brigitte);
+        playerContext.setCurrentSet(set);
 
         //When
-        sut = getPlayYatzi(playerContext);
         sut.play(brigitte,set,StrategyScoreType.CATEGORY_FOURS.getType());
 
         //Then
@@ -160,20 +163,20 @@ public class PlayYatziTest {
 
     @ParameterizedTest
     @CsvSource({
-            "1, 3, 1, 2, 5,     5",
-            "1, 2, 3, 5, 5,     10",
-            "1, 2, 5, 5, 5,     15",
-            "3, 5, 5, 5, 5,     20",
-            "3, 4, 4, 4, 4,     0",
-
+        "1, 3, 1, 2, 5,     5",
+        "1, 2, 3, 5, 5,     10",
+        "1, 2, 5, 5, 5,     15",
+        "3, 5, 5, 5, 5,     20",
+        "3, 4, 4, 4, 4,     0",
     })
     public void shouldPlayYatziWithFivesCategory(final int die1, final int die2, final int die3,
-                                                 final int die4, final int die5, final int expected){
+        final int die4, final int die5, final int expected){
         //Given
-        PlayerSet set = getPlayerSet(die1, die2, die3, die4, die5);
+        PlayerSet set = new PlayerSet(die1, die2, die3, die4, die5);
+        playerContext.setCurrentPlayer(brigitte);
+        playerContext.setCurrentSet(set);
 
         //When
-        sut = getPlayYatzi(playerContext);
         sut.play(brigitte,set,StrategyScoreType.CATEGORY_FIVES.getType());
 
         //Then
@@ -182,20 +185,20 @@ public class PlayYatziTest {
 
     @ParameterizedTest
     @CsvSource({
-            "1, 3, 1, 2, 6,     6",
-            "1, 2, 3, 6, 6,     12",
-            "1, 2, 6, 6, 6,     18",
-            "3, 6, 6, 6, 6,     24",
-            "3, 4, 4, 4, 4,     0",
-
+        "1, 3, 1, 2, 6,     6",
+        "1, 2, 3, 6, 6,     12",
+        "1, 2, 6, 6, 6,     18",
+        "3, 6, 6, 6, 6,     24",
+        "3, 4, 4, 4, 4,     0",
     })
     public void shouldPlayYatziWithSixesCategory(final int die1, final int die2, final int die3,
-                                                 final int die4, final int die5, final int expected){
+        final int die4, final int die5, final int expected){
         //Given
-        PlayerSet set = getPlayerSet(die1, die2, die3, die4, die5);
+        PlayerSet set = new PlayerSet(die1, die2, die3, die4, die5);
+        playerContext.setCurrentPlayer(brigitte);
+        playerContext.setCurrentSet(set);
 
         //When
-        sut = getPlayYatzi(playerContext);
         sut.play(brigitte,set,StrategyScoreType.CATEGORY_SIXES.getType());
 
         //Then
@@ -397,28 +400,4 @@ public class PlayYatziTest {
         //Then
         assertEquals(0, brigitte.getScore());
     }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void shouldThrowExceptionWhenDesGreaterThan6(){
-        //Given
-        PlayerSet set = new PlayerSet(1,1,2,2,8);
-        playerContext.setCurrentPlayer(brigitte);
-        playerContext.setCurrentSet(set);
-
-        //When
-        sut.play(brigitte,set,StrategyScoreType.CATEGORY_FOUR_OF_A_KIND.getType());
-
-        //Then
-        assertEquals(0, brigitte.getScore());
-    }
-
-    private PlayerSet getPlayerSet(int die1, int die2, int die3, int die4, int die5) {
-        brigitte = new Player("bgi","brigitte",0);
-        playerContext.initAvailableCategories();
-        PlayerSet set = new PlayerSet(die1, die2, die3, die4, die5);
-        playerContext.setCurrentPlayer(brigitte);
-        playerContext.setCurrentSet(set);
-        return set;
-    }
-
 }
