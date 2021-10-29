@@ -29,4 +29,8 @@ public class PlayerSet {
   public int[] getCountDiceByValue() {
     return countDiceByValue;
   }
+
+  public int sumAllDice() {
+    return diceValues.stream().reduce(0, Integer::sum);
+  }
 }

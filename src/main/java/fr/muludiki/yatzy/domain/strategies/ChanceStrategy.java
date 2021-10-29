@@ -12,8 +12,6 @@ class ChanceStrategy implements ScoreStrategy {
 
     @Override
     public int compute(PlayerSet playerSet) {
-        return playerSet.getDiceValues()
-            .stream()
-            .reduce(0, Integer::sum);
+        return playerSet.sumAllDice();
     }
 }
