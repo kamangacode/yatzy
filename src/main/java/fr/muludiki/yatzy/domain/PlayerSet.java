@@ -39,4 +39,10 @@ public class PlayerSet {
         .distinct()
         .count() == 1;
   }
+
+  public int sumMatchingDiceForDiceValue(int diceValue) {
+    return diceValues.stream()
+        .filter(value -> value == diceValue)
+        .reduce(0, Integer::sum);
+  }
 }

@@ -18,9 +18,6 @@ class SingleStrategy implements ScoreStrategy {
 
     @Override
     public int compute(PlayerSet playerSet) {
-        return playerSet.getDiceValues()
-            .stream()
-            .filter(integer -> integer == value)
-            .reduce(0, (Integer::sum));
+        return playerSet.sumMatchingDiceForDiceValue(value);
     }
 }
