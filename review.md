@@ -9,3 +9,6 @@
 * migre test to junit 5
 * simplifie le test de cohérence sur la valeur des dés. 
 * deplace ce test dans PlayerSetTest. on devrait tester unitairement le reste de cet objet 
+
+# Supression de l'abstract 
+* countDiceByValue porter par le playerSet

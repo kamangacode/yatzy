@@ -10,6 +10,6 @@ import fr.muludiki.yatzy.domain.PlayerSet;
  */
 class ChanceStrategy implements ScoreStrategy {
     public int compute(PlayerSet playerSet) {
-        return playerSet.getSet().stream().reduce(0, Integer::sum);
+        return playerSet.getDiceValues().stream().reduce(0, Integer::sum);
     }
 }

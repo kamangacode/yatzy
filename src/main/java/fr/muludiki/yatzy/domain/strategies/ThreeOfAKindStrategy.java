@@ -12,11 +12,10 @@ import java.util.stream.Stream;
  * 3,3,4,5,6 notes 0
  * 3,3,3,3,1 note 9 (3+3+3)
  */
-class ThreeOfAKindStrategy extends AbstractStrategy implements ScoreStrategy {
+class ThreeOfAKindStrategy implements ScoreStrategy {
     @Override
-    public int compute(PlayerSet set) {
-        increaseRowByOne(set);
-        return Stream.of(1, 2, 3, 4, 5, 6).filter(integer -> tallies[integer-1] >= 3)
+    public int compute(PlayerSet playerSet) {
+        return Stream.of(1, 2, 3, 4, 5, 6).filter(integer -> playerSet.getCountDiceByValue()[integer-1] >= 3)
                 .mapToInt(v -> v * 3)
                 .max()
                 .orElse(0);

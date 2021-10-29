@@ -11,15 +11,14 @@ import java.util.stream.Stream;
  *
  * le joueur marque 15 (la somme de tous les dés).
  */
-class SmallStraightStrategy extends AbstractStrategy implements ScoreStrategy {
+class SmallStraightStrategy implements ScoreStrategy {
 
     public static final int SMALL_STRAIGHT_SCORE = 15;
     public static final int SMALL_STRAIGHT_NO_SCORE = 0;
 
     @Override
-    public int compute(PlayerSet set) {
-        increaseRowByOne(set);
-        if(Stream.of(1, 2, 3, 4, 5).filter(integer -> tallies[integer-1] == 1)
+    public int compute(PlayerSet playerSet) {
+        if(Stream.of(1, 2, 3, 4, 5).filter(integer -> playerSet.getCountDiceByValue()[integer-1] == 1)
                 .count() == 5) {
             return SMALL_STRAIGHT_SCORE;
         }else{
