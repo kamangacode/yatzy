@@ -1,33 +1,32 @@
 package fr.muludiki.yatzy.domain;
 
-import javax.validation.Valid;
-import java.util.ArrayList;
+import static java.text.MessageFormat.format;
+
 import java.util.List;
 
-/**
- * Permet de stocker les faces de dès jouées par un joueur
- */
 public class PlayerSet {
 
-    private final List<Integer> set = new ArrayList<>();
+  public static final int MINIMUM_DICE_VALUE = 1;
+  public static final int MAXIMUM_DICE_VALUE = 6;
 
-    public PlayerSet(@Valid()  int des1, int des2, int des3, int des4, int des5){
-        set.add(canAddDes(des1));
-        set.add(canAddDes(des2));
-        set.add(canAddDes(des3));
-        set.add(canAddDes(des4));
-        set.add(canAddDes(des5));
+  private final List<Integer> diceValues;
+  public final int[] countDiceByValue = new int[MAXIMUM_DICE_VALUE];
+
+  public PlayerSet(int des1, int des2, int des3, int des4, int des5) {
+    diceValues = List.of(des1, des2, des3, des4, des5);
+    if (diceValues.stream().anyMatch(diceValue -> diceValue < MINIMUM_DICE_VALUE || diceValue > MAXIMUM_DICE_VALUE)) {
+      throw new IllegalArgumentException(
+          format("Dice value must be between {0} and {1}.", MINIMUM_DICE_VALUE, MAXIMUM_DICE_VALUE));
     }
 
-    private int canAddDes(int des) {
-        if(0 < des && des <= 6){
-            return des;
-        }else{
-            throw new IllegalArgumentException("The number for the dice must be greater than 0 and less than 7");
-        }
-    }
+    diceValues.forEach(diceValue -> countDiceByValue[diceValue - 1]++);
+  }
 
-    public List<Integer> getSet() {
-        return set;
-    }
+  public List<Integer> getDiceValues() {
+    return diceValues;
+  }
+
+  public int[] getCountDiceByValue() {
+    return countDiceByValue;
+  }
 }
