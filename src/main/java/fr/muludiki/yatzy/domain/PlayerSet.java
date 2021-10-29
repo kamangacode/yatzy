@@ -33,4 +33,10 @@ public class PlayerSet {
   public int sumAllDice() {
     return diceValues.stream().reduce(0, Integer::sum);
   }
+
+  public boolean allDiceHaveSameNumber() {
+    return diceValues.stream()
+        .distinct()
+        .count() == 1;
+  }
 }

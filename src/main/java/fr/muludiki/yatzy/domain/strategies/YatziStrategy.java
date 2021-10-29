@@ -14,6 +14,6 @@ class YatziStrategy implements ScoreStrategy {
     private static final int YATZI_STRATEGY_NO_SCORE = 0;
 
     public int compute(PlayerSet playerSet) {
-        return playerSet.getDiceValues().stream().distinct().count() == 1 ? YATZI_STRATEGY_SCORE : YATZI_STRATEGY_NO_SCORE;
+        return playerSet.allDiceHaveSameNumber() ? YATZI_STRATEGY_SCORE : YATZI_STRATEGY_NO_SCORE;
     }
 }
