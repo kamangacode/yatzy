@@ -16,7 +16,7 @@ class PairStrategy extends AbstractStrategy implements ScoreStrategy {
     @Override
     public int compute(PlayerSet playerSet) {
         increaseRowByOne(playerSet);
-        return Stream.of(1, 2, 3, 4, 5).filter(integer -> tallies[integer-1] >= 2)
+        return Stream.of(1, 2, 3, 4, 5, 6).filter(integer -> tallies[integer-1] >= 2)
                 .mapToInt(v -> v * 2)
                 .max()
                 .orElse(0);

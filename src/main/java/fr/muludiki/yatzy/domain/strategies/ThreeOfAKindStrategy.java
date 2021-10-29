@@ -16,7 +16,7 @@ class ThreeOfAKindStrategy extends AbstractStrategy implements ScoreStrategy {
     @Override
     public int compute(PlayerSet set) {
         increaseRowByOne(set);
-        return Stream.of(1, 2, 3, 4, 5).filter(integer -> tallies[integer-1] >= 3)
+        return Stream.of(1, 2, 3, 4, 5, 6).filter(integer -> tallies[integer-1] >= 3)
                 .mapToInt(v -> v * 3)
                 .max()
                 .orElse(0);

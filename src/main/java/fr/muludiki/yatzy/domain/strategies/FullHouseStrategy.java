@@ -26,11 +26,11 @@ class FullHouseStrategy extends AbstractStrategy implements ScoreStrategy {
 
         increaseRowByOne(playerSet);
 
-        int pairs = Stream.of(1, 2, 3, 4, 5)
+        int pairs = Stream.of(1, 2, 3, 4, 5, 6)
                 .filter(integer -> tallies[integer - 1] == PAIR)
                 .findFirst().orElse(0);
 
-        int threes = Stream.of(1, 2, 3, 4, 5)
+        int threes = Stream.of(1, 2, 3, 4, 5, 6)
                 .filter(integer -> tallies[integer - 1] == THREES)
                 .findFirst().orElse(0);
 

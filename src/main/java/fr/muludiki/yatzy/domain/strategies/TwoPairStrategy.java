@@ -23,7 +23,7 @@ class TwoPairStrategy extends AbstractStrategy implements ScoreStrategy {
     public int compute(PlayerSet set) {
         increaseRowByOne(set);
 
-        ArrayList<Integer> pairs = Stream.of(1, 2, 3, 4, 5)
+        ArrayList<Integer> pairs = Stream.of(1, 2, 3, 4, 5, 6)
                 .filter(integer -> tallies[integer - 1] >= PAIR)
                 .collect(Collectors.toCollection(ArrayList::new));
 
