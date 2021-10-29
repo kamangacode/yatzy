@@ -2,6 +2,8 @@ package fr.muludiki.yatzy.domain.strategies;
 
 import fr.muludiki.yatzy.domain.PlayerSet;
 
+import java.util.stream.Stream;
+
 /**
  * S'il y a quatre dés avec le même numéro,
  * le joueur marque la somme de ces dés. Par exemple, lorsqu'il est placé sur un « carré » :
@@ -12,11 +14,11 @@ import fr.muludiki.yatzy.domain.PlayerSet;
  */
 class FourOfAKindStrategy extends AbstractStrategy implements ScoreStrategy {
     @Override
-    public int compute(PlayerSet set) {
-        increaseRowByOne(set);
-        for (int die = 0; die < 6; die++)
-            if (tallies[die] >= 4)
-                return (die+1) * 4;
-        return 0;
+    public int compute(PlayerSet playerSet) {
+        increaseRowByOne(playerSet);
+        return Stream.of(1, 2, 3, 4, 5).filter(integer -> tallies[integer-1] >= 4)
+                .mapToInt(v -> v * 4)
+                .max()
+                .orElse(0);
     }
 }

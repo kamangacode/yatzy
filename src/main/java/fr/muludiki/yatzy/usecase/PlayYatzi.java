@@ -7,6 +7,8 @@ import fr.muludiki.yatzy.domain.strategies.ScoreStrategy;
 import fr.muludiki.yatzy.domain.strategies.ScoreStrategyFactory;
 import fr.muludiki.yatzy.domain.strategies.StrategyScoreType;
 
+import java.util.Optional;
+
 /**
  * Le jeu de Yatzy est un simple jeu de dés. Chaque joueur lance cinq dés à six faces.
  * Ils peuvent relancer tout ou partie des dés jusqu'à trois fois (y compris le lancer d'origine).
@@ -42,9 +44,11 @@ public class PlayYatzi {
      */
     public void play(Player player, PlayerSet set, String category){
         if(categoryAvailable(category)){
-            ScoreStrategy scoreStrategy = new ScoreStrategyFactory().getStrategy(StrategyScoreType.of(category));
-            player.updateScore(set, scoreStrategy);
-            playerContext.setCurrentStrategy(scoreStrategy);
+            Optional<ScoreStrategy> scoreStrategy = new ScoreStrategyFactory().getStrategy(category);
+            if(scoreStrategy.isPresent()){
+                player.updateScore(set, scoreStrategy.get());
+                playerContext.setCurrentStrategy(scoreStrategy.get());
+            }
         }
     }
 

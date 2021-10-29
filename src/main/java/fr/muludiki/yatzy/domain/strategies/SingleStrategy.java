@@ -15,15 +15,10 @@ class SingleStrategy implements ScoreStrategy {
     public SingleStrategy(int value){
         this.value = value;
     }
-    @Override
-    public int compute(PlayerSet set) {
-        int score = 0;
-        if (set.getDes1() == value) score += value;
-        if (set.getDes2() == value) score += value;
-        if (set.getDes3() == value) score += value;
-        if (set.getDes4() == value) score += value;
-        if (set.getDes5() == value) score += value;
 
-        return score;
+    @Override
+    public int compute(PlayerSet playerSet) {
+        return playerSet.getSet().stream().filter(integer -> integer == value)
+                .reduce(0, ((a, b) -> a + b));
     }
 }

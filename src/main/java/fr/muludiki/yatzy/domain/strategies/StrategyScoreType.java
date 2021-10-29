@@ -15,11 +15,15 @@ public enum StrategyScoreType {
     CATEGORY_TWO_PAIR("deux paires"),
     CATEGORY_FOUR_OF_A_KIND("carre"),
     CATEGORY_THREE_OF_A_KIND("brelan"),
-    CATEGORY_SMALL_STRAIGHT("petite ligne droite"),
-    CATEGORY_LARGE_STRAIGHT("grand ligne droite"),
+    CATEGORY_SMALL_STRAIGHT("petite suite"),
+    CATEGORY_LARGE_STRAIGHT("grande suite"),
     CATEGORY_FULLHOUSE("full house");
-    
-    public String type;
+
+    public String getType() {
+        return type;
+    }
+
+    private String type;
     
     StrategyScoreType(String type){
         this.type = type;
@@ -28,5 +32,4 @@ public enum StrategyScoreType {
     public static StrategyScoreType of(String type){
         return Arrays.stream(StrategyScoreType.values()).filter(c -> c.type.equals(type)).findFirst().get();
     }
-
 }

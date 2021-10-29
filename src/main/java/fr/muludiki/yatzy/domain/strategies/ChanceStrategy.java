@@ -9,13 +9,7 @@ import fr.muludiki.yatzy.domain.PlayerSet;
  * <li>4,5,5,6,1 placé sur « chance » scores 21 (4+5+5+6+1)</li>
  */
 class ChanceStrategy implements ScoreStrategy {
-    public int compute(PlayerSet set) {
-        int score = 0;
-        score += set.getDes1();
-        score += set.getDes2();
-        score += set.getDes3();
-        score += set.getDes4();
-        score += set.getDes5();
-        return score;
+    public int compute(PlayerSet playerSet) {
+        return playerSet.getSet().stream().reduce(0, Integer::sum);
     }
 }

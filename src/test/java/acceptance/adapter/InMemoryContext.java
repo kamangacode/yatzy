@@ -8,13 +8,14 @@ import fr.muludiki.yatzy.domain.strategies.StrategyScoreType;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 public class InMemoryContext implements PlayerContext {
 
     private Player currentPlayer;
     private PlayerSet currentSet;
     private ScoreStrategy currentScoreStrategy;
-    private final Map<String, Boolean> categoryAvailabilities = new HashMap<>();
+    private final Map<StrategyScoreType, Boolean> categoryAvailabilities = new HashMap<>();
 
     public void setCurrentPlayer(Player c) {
         this.currentPlayer = c;
@@ -42,28 +43,29 @@ public class InMemoryContext implements PlayerContext {
 
 
     public boolean isCategoryAvailable(String category) {
-        return categoryAvailabilities.get(category);
+        Optional<Boolean> optionalAvailability = Optional.ofNullable(categoryAvailabilities.get(StrategyScoreType.of(category)));
+        return optionalAvailability.isPresent() && optionalAvailability.get().booleanValue();
     }
 
     public void deactiveCategory(String category) {
-        categoryAvailabilities.replace(category, Boolean.FALSE);
+        categoryAvailabilities.replace(StrategyScoreType.of(category), Boolean.FALSE);
     }
 
     public void initAvailableCategories() {
-        categoryAvailabilities.put(StrategyScoreType.CATEGORY_CHANCE.type, Boolean.TRUE);
-        categoryAvailabilities.put(StrategyScoreType.CATEGORY_YATZI.type, Boolean.TRUE);
-        categoryAvailabilities.put(StrategyScoreType.CATEGORY_ONES.type, Boolean.TRUE);
-        categoryAvailabilities.put(StrategyScoreType.CATEGORY_TWOS.type, Boolean.TRUE);
-        categoryAvailabilities.put(StrategyScoreType.CATEGORY_THREES.type, Boolean.TRUE);
-        categoryAvailabilities.put(StrategyScoreType.CATEGORY_FOURS.type, Boolean.TRUE);
-        categoryAvailabilities.put(StrategyScoreType.CATEGORY_FIVES.type, Boolean.TRUE);
-        categoryAvailabilities.put(StrategyScoreType.CATEGORY_SIXES.type, Boolean.TRUE);
-        categoryAvailabilities.put(StrategyScoreType.CATEGORY_SCORE_PAIR.type, Boolean.TRUE);
-        categoryAvailabilities.put(StrategyScoreType.CATEGORY_TWO_PAIR.type, Boolean.TRUE);
-        categoryAvailabilities.put(StrategyScoreType.CATEGORY_FOUR_OF_A_KIND.type, Boolean.TRUE);
-        categoryAvailabilities.put(StrategyScoreType.CATEGORY_THREE_OF_A_KIND.type, Boolean.TRUE);
-        categoryAvailabilities.put(StrategyScoreType.CATEGORY_SMALL_STRAIGHT.type, Boolean.TRUE);
-        categoryAvailabilities.put(StrategyScoreType.CATEGORY_LARGE_STRAIGHT.type, Boolean.TRUE);
-        categoryAvailabilities.put(StrategyScoreType.CATEGORY_FULLHOUSE.type, Boolean.TRUE);
+        categoryAvailabilities.put(StrategyScoreType.CATEGORY_CHANCE, Boolean.TRUE);
+        categoryAvailabilities.put(StrategyScoreType.CATEGORY_YATZI, Boolean.TRUE);
+        categoryAvailabilities.put(StrategyScoreType.CATEGORY_ONES, Boolean.TRUE);
+        categoryAvailabilities.put(StrategyScoreType.CATEGORY_TWOS, Boolean.TRUE);
+        categoryAvailabilities.put(StrategyScoreType.CATEGORY_THREES, Boolean.TRUE);
+        categoryAvailabilities.put(StrategyScoreType.CATEGORY_FOURS, Boolean.TRUE);
+        categoryAvailabilities.put(StrategyScoreType.CATEGORY_FIVES, Boolean.TRUE);
+        categoryAvailabilities.put(StrategyScoreType.CATEGORY_SIXES, Boolean.TRUE);
+        categoryAvailabilities.put(StrategyScoreType.CATEGORY_SCORE_PAIR, Boolean.TRUE);
+        categoryAvailabilities.put(StrategyScoreType.CATEGORY_TWO_PAIR, Boolean.TRUE);
+        categoryAvailabilities.put(StrategyScoreType.CATEGORY_FOUR_OF_A_KIND, Boolean.TRUE);
+        categoryAvailabilities.put(StrategyScoreType.CATEGORY_THREE_OF_A_KIND, Boolean.TRUE);
+        categoryAvailabilities.put(StrategyScoreType.CATEGORY_SMALL_STRAIGHT, Boolean.TRUE);
+        categoryAvailabilities.put(StrategyScoreType.CATEGORY_LARGE_STRAIGHT, Boolean.TRUE);
+        categoryAvailabilities.put(StrategyScoreType.CATEGORY_FULLHOUSE, Boolean.TRUE);
     }
 }

@@ -2,6 +2,8 @@ package fr.muludiki.yatzy.domain.strategies;
 
 import fr.muludiki.yatzy.domain.PlayerSet;
 
+import java.util.stream.Stream;
+
 /**
  * Le joueur marque la somme des deux dés correspondants les plus élevés. Par exemple, lorsqu'il est placé sur « paire » :
  *
@@ -12,11 +14,12 @@ import fr.muludiki.yatzy.domain.PlayerSet;
  */
 class PairStrategy extends AbstractStrategy implements ScoreStrategy {
     @Override
-    public int compute(PlayerSet set) {
-        increaseRowByOne(set);
-        for (int at = 0; at != 6; at++)
-            if (tallies[6-at-1] >= 2)
-                return (6-at)*2;
-        return 0;
+    public int compute(PlayerSet playerSet) {
+        increaseRowByOne(playerSet);
+        return Stream.of(1, 2, 3, 4, 5).filter(integer -> tallies[integer-1] >= 2)
+                .mapToInt(v -> v * 2)
+                .max()
+                .orElse(0);
+
     }
 }

@@ -9,13 +9,15 @@ import fr.muludiki.yatzy.domain.PlayerSet;
  * <li>1,1,1,2,1 placé sur des scores « yatzy » 0</li>
  */
 class YatziStrategy extends AbstractStrategy implements ScoreStrategy {
-    public int compute(PlayerSet set) {
-        int[] dice = {set.getDes1(),set.getDes2(),set.getDes3(),set.getDes4(),set.getDes5()};
-        for (int die : dice)
-            tallies[die-1]++;
-        for (int i = 0; i != 6; i++)
-            if (tallies[i] == 5)
-                return 50;
-        return 0;
+
+    public static final int YATZI_STRATEGY_SCORE = 50;
+    public static final int YATZI_STRATEGY_NO_SCORE = 0;
+
+    public int compute(PlayerSet playerSet) {
+        if( playerSet.getSet().stream().distinct().count() == 1 ){
+            return YATZI_STRATEGY_SCORE;
+        }else{
+            return YATZI_STRATEGY_NO_SCORE;
+        }
     }
 }
