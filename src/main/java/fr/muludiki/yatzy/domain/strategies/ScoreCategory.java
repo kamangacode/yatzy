@@ -12,10 +12,10 @@ public enum ScoreCategory {
     CATEGORY_FOURS("fours", () -> new SingleStrategy(4)),
     CATEGORY_FIVES("fives", () -> new SingleStrategy(5)),
     CATEGORY_SIXES("sixes", () -> new SingleStrategy(6)),
-    CATEGORY_SCORE_PAIR("paire", PairStrategy::new),
+    CATEGORY_SCORE_PAIR("paire", () -> new SomeOfAKindStrategy(2)),
     CATEGORY_TWO_PAIR("deux paires", TwoPairStrategy::new),
-    CATEGORY_FOUR_OF_A_KIND("carre", FourOfAKindStrategy::new),
-    CATEGORY_THREE_OF_A_KIND("brelan", ThreeOfAKindStrategy::new),
+    CATEGORY_FOUR_OF_A_KIND("carre",() -> new SomeOfAKindStrategy(4)),
+    CATEGORY_THREE_OF_A_KIND("brelan", () -> new SomeOfAKindStrategy(3)),
     CATEGORY_SMALL_STRAIGHT("petite suite", SmallStraightStrategy::new),
     CATEGORY_LARGE_STRAIGHT("grande suite", LargeStraightStrategy::new),
     CATEGORY_FULLHOUSE("full house", FullHouseStrategy::new);

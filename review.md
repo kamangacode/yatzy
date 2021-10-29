@@ -11,10 +11,15 @@
 * deplace ce test dans PlayerSetTest. on devrait tester unitairement le reste de cet objet 
 
 # Supression de l'abstract 
-* countDiceByValue porter par le playerSet
+* countDiceByValue porté par le playerSet
 
 # PlayerContext
 * suppression code inutilisé
 * formatage
 
 # Clean toutes classe
+
+# PlayerSet 
+* deplace certaines methodes de calcul dans l'objet qui peut porter cette responsabilité
+
+# Factorisation des X of a kind en une strategie
