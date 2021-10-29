@@ -6,7 +6,7 @@ import acceptance.adapter.InMemoryContext;
 import fr.muludiki.yatzy.domain.Player;
 import fr.muludiki.yatzy.domain.PlayerSet;
 import fr.muludiki.yatzy.domain.context.PlayerContext;
-import fr.muludiki.yatzy.domain.strategies.StrategyScoreType;
+import fr.muludiki.yatzy.domain.strategies.ScoreCategory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -37,7 +37,7 @@ public class PlayYatziTest {
     playerContext.setCurrentSet(set);
 
     //When
-    sut.play(brigitte, set, StrategyScoreType.CATEGORY_CHANCE.getType());
+    sut.play(brigitte, set, ScoreCategory.CATEGORY_CHANCE.getType());
 
     //Then
     assertEquals(14, brigitte.getScore());
@@ -51,7 +51,7 @@ public class PlayYatziTest {
     playerContext.setCurrentSet(set);
 
     //When
-    sut.play(brigitte, set, StrategyScoreType.CATEGORY_YATZI.getType());
+    sut.play(brigitte, set, ScoreCategory.CATEGORY_YATZI.getType());
 
     //Then
     assertEquals(50, brigitte.getScore());
@@ -65,7 +65,7 @@ public class PlayYatziTest {
     playerContext.setCurrentSet(set);
 
     //When
-    sut.play(brigitte, set, StrategyScoreType.CATEGORY_YATZI.getType());
+    sut.play(brigitte, set, ScoreCategory.CATEGORY_YATZI.getType());
 
     //Then
     assertEquals(0, brigitte.getScore());
@@ -87,7 +87,7 @@ public class PlayYatziTest {
     playerContext.setCurrentSet(set);
 
     //When
-    sut.play(brigitte, set, StrategyScoreType.CATEGORY_ONES.getType());
+    sut.play(brigitte, set, ScoreCategory.CATEGORY_ONES.getType());
 
     //Then
     assertEquals(expected, brigitte.getScore());
@@ -109,7 +109,7 @@ public class PlayYatziTest {
     playerContext.setCurrentSet(set);
 
     //When
-    sut.play(brigitte, set, StrategyScoreType.CATEGORY_TWOS.getType());
+    sut.play(brigitte, set, ScoreCategory.CATEGORY_TWOS.getType());
 
     //Then
     assertEquals(expected, brigitte.getScore());
@@ -131,7 +131,7 @@ public class PlayYatziTest {
     playerContext.setCurrentSet(set);
 
     //When
-    sut.play(brigitte, set, StrategyScoreType.CATEGORY_THREES.getType());
+    sut.play(brigitte, set, ScoreCategory.CATEGORY_THREES.getType());
 
     //Then
     assertEquals(expected, brigitte.getScore());
@@ -153,7 +153,7 @@ public class PlayYatziTest {
     playerContext.setCurrentSet(set);
 
     //When
-    sut.play(brigitte, set, StrategyScoreType.CATEGORY_FOURS.getType());
+    sut.play(brigitte, set, ScoreCategory.CATEGORY_FOURS.getType());
 
     //Then
     assertEquals(expected, brigitte.getScore());
@@ -175,7 +175,7 @@ public class PlayYatziTest {
     playerContext.setCurrentSet(set);
 
     //When
-    sut.play(brigitte, set, StrategyScoreType.CATEGORY_FIVES.getType());
+    sut.play(brigitte, set, ScoreCategory.CATEGORY_FIVES.getType());
 
     //Then
     assertEquals(expected, brigitte.getScore());
@@ -197,7 +197,7 @@ public class PlayYatziTest {
     playerContext.setCurrentSet(set);
 
     //When
-    sut.play(brigitte, set, StrategyScoreType.CATEGORY_SIXES.getType());
+    sut.play(brigitte, set, ScoreCategory.CATEGORY_SIXES.getType());
 
     //Then
     assertEquals(expected, brigitte.getScore());
@@ -211,7 +211,7 @@ public class PlayYatziTest {
     playerContext.setCurrentSet(set);
 
     //When
-    sut.play(brigitte, set, StrategyScoreType.CATEGORY_SCORE_PAIR.getType());
+    sut.play(brigitte, set, ScoreCategory.CATEGORY_SCORE_PAIR.getType());
 
     //Then
     assertEquals(8, brigitte.getScore());
@@ -225,7 +225,7 @@ public class PlayYatziTest {
     playerContext.setCurrentSet(set);
 
     //When
-    sut.play(brigitte, set, StrategyScoreType.CATEGORY_SCORE_PAIR.getType());
+    sut.play(brigitte, set, ScoreCategory.CATEGORY_SCORE_PAIR.getType());
 
     //Then
     assertEquals(0, brigitte.getScore());
@@ -239,7 +239,7 @@ public class PlayYatziTest {
     playerContext.setCurrentSet(set);
 
     //When
-    sut.play(brigitte, set, StrategyScoreType.CATEGORY_TWO_PAIR.getType());
+    sut.play(brigitte, set, ScoreCategory.CATEGORY_TWO_PAIR.getType());
 
     //Then
     assertEquals(8, brigitte.getScore());
@@ -253,7 +253,7 @@ public class PlayYatziTest {
     playerContext.setCurrentSet(set);
 
     //When
-    sut.play(brigitte, set, StrategyScoreType.CATEGORY_TWO_PAIR.getType());
+    sut.play(brigitte, set, ScoreCategory.CATEGORY_TWO_PAIR.getType());
 
     //Then
     assertEquals(0, brigitte.getScore());
@@ -267,7 +267,7 @@ public class PlayYatziTest {
     playerContext.setCurrentSet(set);
 
     //When
-    sut.play(brigitte, set, StrategyScoreType.CATEGORY_THREE_OF_A_KIND.getType());
+    sut.play(brigitte, set, ScoreCategory.CATEGORY_THREE_OF_A_KIND.getType());
 
     //Then
     assertEquals(9, brigitte.getScore());
@@ -281,7 +281,7 @@ public class PlayYatziTest {
     playerContext.setCurrentSet(set);
 
     //When
-    sut.play(brigitte, set, StrategyScoreType.CATEGORY_THREE_OF_A_KIND.getType());
+    sut.play(brigitte, set, ScoreCategory.CATEGORY_THREE_OF_A_KIND.getType());
 
     //Then
     assertEquals(0, brigitte.getScore());
@@ -295,7 +295,7 @@ public class PlayYatziTest {
     playerContext.setCurrentSet(set);
 
     //When
-    sut.play(brigitte, set, StrategyScoreType.CATEGORY_SMALL_STRAIGHT.getType());
+    sut.play(brigitte, set, ScoreCategory.CATEGORY_SMALL_STRAIGHT.getType());
 
     //Then
     assertEquals(15, brigitte.getScore());
@@ -309,7 +309,7 @@ public class PlayYatziTest {
     playerContext.setCurrentSet(set);
 
     //When
-    sut.play(brigitte, set, StrategyScoreType.CATEGORY_SMALL_STRAIGHT.getType());
+    sut.play(brigitte, set, ScoreCategory.CATEGORY_SMALL_STRAIGHT.getType());
 
     //Then
     assertEquals(0, brigitte.getScore());
@@ -323,7 +323,7 @@ public class PlayYatziTest {
     playerContext.setCurrentSet(set);
 
     //When
-    sut.play(brigitte, set, StrategyScoreType.CATEGORY_LARGE_STRAIGHT.getType());
+    sut.play(brigitte, set, ScoreCategory.CATEGORY_LARGE_STRAIGHT.getType());
 
     //Then
     assertEquals(20, brigitte.getScore());
@@ -337,7 +337,7 @@ public class PlayYatziTest {
     playerContext.setCurrentSet(set);
 
     //When
-    sut.play(brigitte, set, StrategyScoreType.CATEGORY_LARGE_STRAIGHT.getType());
+    sut.play(brigitte, set, ScoreCategory.CATEGORY_LARGE_STRAIGHT.getType());
 
     //Then
     assertEquals(0, brigitte.getScore());
@@ -351,7 +351,7 @@ public class PlayYatziTest {
     playerContext.setCurrentSet(set);
 
     //When
-    sut.play(brigitte, set, StrategyScoreType.CATEGORY_FULLHOUSE.getType());
+    sut.play(brigitte, set, ScoreCategory.CATEGORY_FULLHOUSE.getType());
 
     //Then
     assertEquals(8, brigitte.getScore());
@@ -365,7 +365,7 @@ public class PlayYatziTest {
     playerContext.setCurrentSet(set);
 
     //When
-    sut.play(brigitte, set, StrategyScoreType.CATEGORY_FULLHOUSE.getType());
+    sut.play(brigitte, set, ScoreCategory.CATEGORY_FULLHOUSE.getType());
 
     //Then
     assertEquals(8, brigitte.getScore());
@@ -379,7 +379,7 @@ public class PlayYatziTest {
     playerContext.setCurrentSet(set);
 
     //When
-    sut.play(brigitte, set, StrategyScoreType.CATEGORY_FOUR_OF_A_KIND.getType());
+    sut.play(brigitte, set, ScoreCategory.CATEGORY_FOUR_OF_A_KIND.getType());
 
     //Then
     assertEquals(16, brigitte.getScore());
@@ -393,7 +393,7 @@ public class PlayYatziTest {
     playerContext.setCurrentSet(set);
 
     //When
-    sut.play(brigitte, set, StrategyScoreType.CATEGORY_FOUR_OF_A_KIND.getType());
+    sut.play(brigitte, set, ScoreCategory.CATEGORY_FOUR_OF_A_KIND.getType());
 
     //Then
     assertEquals(0, brigitte.getScore());
