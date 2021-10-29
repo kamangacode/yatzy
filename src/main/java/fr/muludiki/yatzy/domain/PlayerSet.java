@@ -22,10 +22,6 @@ public class PlayerSet {
     diceValues.forEach(diceValue -> countDiceByValue[diceValue - 1]++);
   }
 
-  public List<Integer> getDiceValues() {
-    return diceValues;
-  }
-
   public int[] getCountDiceByValue() {
     return countDiceByValue;
   }

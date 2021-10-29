@@ -32,6 +32,11 @@
 # strategy
 * Utilise intStream 
 
+# PlayerSet
+* suppression du getter !!
+
 # TODO - NEXT 
 * Test de toutes les nouvelles classes, methodes créés ou déplacées...
 * Une partie de l'algo du full, 2 pair et XOfAKind doit etre factorisable. tjrs le meme pattern stream.filter.xx.orElese
+* getCountDiceByValue doit pourvoir etre supprimer si on pousse encore
+
