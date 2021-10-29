@@ -33,15 +33,6 @@ public class InMemoryContext implements PlayerContext {
         return currentSet;
     }
 
-    public void setCurrentStrategy(ScoreStrategy scoreStrategy) {
-        currentScoreStrategy = scoreStrategy;
-    }
-
-    public ScoreStrategy currentStrategy() {
-        return currentScoreStrategy;
-    }
-
-
     public boolean isCategoryAvailable(String category) {
         Optional<Boolean> optionalAvailability = Optional.ofNullable(categoryAvailabilities.get(StrategyScoreType.of(category)));
         return optionalAvailability.isPresent() && optionalAvailability.get().booleanValue();

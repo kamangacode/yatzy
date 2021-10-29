@@ -12,3 +12,7 @@
 
 # Supression de l'abstract 
 * countDiceByValue porter par le playerSet
+
+# PlayerContext
+* suppression code inutilisé
+* formatage

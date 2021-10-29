@@ -45,10 +45,7 @@ public class PlayYatzi {
     public void play(Player player, PlayerSet set, String category){
         if(categoryAvailable(category)){
             Optional<ScoreStrategy> scoreStrategy = new ScoreStrategyFactory().getStrategy(category);
-            if(scoreStrategy.isPresent()){
-                player.updateScore(set, scoreStrategy.get());
-                playerContext.setCurrentStrategy(scoreStrategy.get());
-            }
+            scoreStrategy.ifPresent(strategy -> player.updateScore(set, strategy));
         }
     }
 
