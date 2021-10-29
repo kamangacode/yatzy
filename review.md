@@ -16,3 +16,5 @@
 # PlayerContext
 * suppression code inutilisé
 * formatage
+
+# Clean toutes classe

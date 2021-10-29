@@ -12,8 +12,8 @@ class FourOfAKindStrategy implements ScoreStrategy {
 
   @Override
   public int compute(PlayerSet playerSet) {
-
-    return Stream.of(1, 2, 3, 4, 5, 6).filter(integer -> playerSet.getCountDiceByValue()[integer - 1] >= 4)
+    return Stream.of(1, 2, 3, 4, 5, 6)
+        .filter(integer -> playerSet.getCountDiceByValue()[integer - 1] >= 4)
         .mapToInt(v -> v * 4)
         .max()
         .orElse(0);

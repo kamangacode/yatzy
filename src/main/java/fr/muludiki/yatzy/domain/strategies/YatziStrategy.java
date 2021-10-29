@@ -10,14 +10,10 @@ import fr.muludiki.yatzy.domain.PlayerSet;
  */
 class YatziStrategy implements ScoreStrategy {
 
-    public static final int YATZI_STRATEGY_SCORE = 50;
-    public static final int YATZI_STRATEGY_NO_SCORE = 0;
+    private static final int YATZI_STRATEGY_SCORE = 50;
+    private static final int YATZI_STRATEGY_NO_SCORE = 0;
 
     public int compute(PlayerSet playerSet) {
-        if( playerSet.getDiceValues().stream().distinct().count() == 1 ){
-            return YATZI_STRATEGY_SCORE;
-        }else{
-            return YATZI_STRATEGY_NO_SCORE;
-        }
+        return playerSet.getDiceValues().stream().distinct().count() == 1 ? YATZI_STRATEGY_SCORE : YATZI_STRATEGY_NO_SCORE;
     }
 }

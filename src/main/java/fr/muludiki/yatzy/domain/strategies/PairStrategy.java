@@ -13,12 +13,12 @@ import java.util.stream.Stream;
  * 3,3,3,3,1 note 6 (3+3)
  */
 class PairStrategy implements ScoreStrategy {
+
     @Override
     public int compute(PlayerSet playerSet) {
         return Stream.of(1, 2, 3, 4, 5, 6).filter(integer -> playerSet.getCountDiceByValue()[integer-1] >= 2)
                 .mapToInt(v -> v * 2)
                 .max()
                 .orElse(0);
-
     }
 }

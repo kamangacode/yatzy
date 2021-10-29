@@ -23,8 +23,8 @@ public enum StrategyScoreType {
         return type;
     }
 
-    private String type;
-    
+    private final String type;
+
     StrategyScoreType(String type){
         this.type = type;
     }

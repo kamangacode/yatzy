@@ -35,7 +35,7 @@ public class InMemoryContext implements PlayerContext {
 
     public boolean isCategoryAvailable(String category) {
         Optional<Boolean> optionalAvailability = Optional.ofNullable(categoryAvailabilities.get(StrategyScoreType.of(category)));
-        return optionalAvailability.isPresent() && optionalAvailability.get().booleanValue();
+        return optionalAvailability.isPresent() && optionalAvailability.get();
     }
 
     public void deactiveCategory(String category) {

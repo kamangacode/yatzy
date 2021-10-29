@@ -14,5 +14,4 @@ public class ContextPlayerConfiguration {
     public PlayerContext playerContext() {
         return new InMemoryContext();
     }
-
 }

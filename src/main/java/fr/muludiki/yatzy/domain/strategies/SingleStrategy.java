@@ -10,7 +10,7 @@ import fr.muludiki.yatzy.domain.PlayerSet;
  */
 class SingleStrategy implements ScoreStrategy {
 
-    private int value = 0;
+    private final int value;
 
     public SingleStrategy(int value){
         this.value = value;
@@ -18,7 +18,9 @@ class SingleStrategy implements ScoreStrategy {
 
     @Override
     public int compute(PlayerSet playerSet) {
-        return playerSet.getDiceValues().stream().filter(integer -> integer == value)
-                .reduce(0, ((a, b) -> a + b));
+        return playerSet.getDiceValues()
+            .stream()
+            .filter(integer -> integer == value)
+            .reduce(0, (Integer::sum));
     }
 }

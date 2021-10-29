@@ -1,7 +1,7 @@
 package fr.muludiki.yatzy.domain.strategies;
 
 import fr.muludiki.yatzy.domain.PlayerSet;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -15,20 +15,15 @@ import java.util.stream.Stream;
  */
 class TwoPairStrategy implements ScoreStrategy {
 
-    public static final int TWO_PAIR_NO_SCORE = 0;
-    public static final int PAIR = 2;
+    private static final int TWO_PAIR_NO_SCORE = 0;
+    private static final int PAIR = 2;
 
     @Override
     public int compute(PlayerSet playerSet) {
-
-        ArrayList<Integer> pairs = Stream.of(1, 2, 3, 4, 5, 6)
+        List<Integer> pairs = Stream.of(1, 2, 3, 4, 5, 6)
                 .filter(integer -> playerSet.getCountDiceByValue()[integer - 1] >= PAIR)
-                .collect(Collectors.toCollection(ArrayList::new));
+                .collect(Collectors.toList());
 
-        if(pairs.size() == PAIR){
-            return pairs.stream().reduce(0, (a, b) -> a + b * 2);
-        } else{
-            return TWO_PAIR_NO_SCORE;
-        }
+        return pairs.size() == PAIR ? pairs.stream().reduce(0, (a, b) -> a + b * 2) : TWO_PAIR_NO_SCORE;
     }
 }

@@ -8,7 +8,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class InMemoryPlayerRepository implements PlayerRepository {
-    private Set<Player> players = new HashSet<>();
+    private final Set<Player> players = new HashSet<>();
 
     public Set<Player> all() {
         return Collections.unmodifiableSet(players);

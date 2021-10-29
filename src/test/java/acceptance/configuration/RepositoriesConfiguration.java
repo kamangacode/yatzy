@@ -14,5 +14,4 @@ public class RepositoriesConfiguration {
     public PlayerRepository playerRepository() {
         return new InMemoryPlayerRepository();
     }
-
 }
