@@ -21,4 +21,41 @@ class SingleStrategy implements ScoreStrategy {
         return playerSet.getSet().stream().filter(integer -> integer == value)
                 .reduce(0, ((a, b) -> a + b));
     }
+
+    static class OnesStrategy extends SingleStrategy{
+        public OnesStrategy() {
+            super(1);
+        }
+    }
+
+    static class TwosStrategy extends SingleStrategy{
+        public TwosStrategy() {
+            super(2);
+        }
+    }
+
+    static class ThreesStrategy extends SingleStrategy{
+        public ThreesStrategy() {
+            super(3);
+        }
+    }
+
+    static class FoursStrategy extends SingleStrategy{
+        public FoursStrategy() {
+            super(4);
+        }
+    }
+
+    static class FivesStrategy extends SingleStrategy{
+        public FivesStrategy() {
+            super(5);
+        }
+    }
+
+    static class SixStrategy extends SingleStrategy{
+        public SixStrategy() {
+            super(6);
+        }
+    }
+
 }
