@@ -4,5 +4,4 @@ import fr.muludiki.yatzy.domain.PlayerSet;
 
 public interface ScoreStrategy {
     int compute(PlayerSet set);
-
 }

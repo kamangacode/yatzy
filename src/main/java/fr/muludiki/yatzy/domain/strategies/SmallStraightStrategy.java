@@ -1,8 +1,7 @@
 package fr.muludiki.yatzy.domain.strategies;
 
 import fr.muludiki.yatzy.domain.PlayerSet;
-
-import java.util.stream.Stream;
+import java.util.stream.IntStream;
 
 /**
  * Lorsqu'il est placé sur « petite suite », si les dés indiquent
@@ -11,19 +10,16 @@ import java.util.stream.Stream;
  *
  * le joueur marque 15 (la somme de tous les dés).
  */
-class SmallStraightStrategy extends AbstractStrategy implements ScoreStrategy {
+class SmallStraightStrategy implements ScoreStrategy {
 
-    public static final int SMALL_STRAIGHT_SCORE = 15;
-    public static final int SMALL_STRAIGHT_NO_SCORE = 0;
+    private static final int SMALL_STRAIGHT_SCORE = 15;
+    private static final int SMALL_STRAIGHT_NO_SCORE = 0;
 
     @Override
-    public int compute(PlayerSet set) {
-        increaseRowByOne(set);
-        if(Stream.of(1, 2, 3, 4, 5).filter(integer -> tallies[integer-1] == 1)
-                .count() == 5) {
-            return SMALL_STRAIGHT_SCORE;
-        }else{
-            return SMALL_STRAIGHT_NO_SCORE;
-        }
+    public int compute(PlayerSet playerSet) {
+       return IntStream.range(1, 6)
+           .filter(integer -> playerSet.getCountDiceByValue()[integer-1] == 1)
+           .count() == 5
+           ? SMALL_STRAIGHT_SCORE : SMALL_STRAIGHT_NO_SCORE;
     }
 }

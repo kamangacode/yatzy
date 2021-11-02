@@ -1,10 +1,9 @@
 package fr.muludiki.yatzy.domain.strategies;
 
 import fr.muludiki.yatzy.domain.PlayerSet;
-
-import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.util.stream.IntStream;
 
 /**
  * S'il y a deux paires de dés avec le même numéro,
@@ -14,23 +13,18 @@ import java.util.stream.Stream;
  * 1,1,2,3,4 notes 0
  * 1,1,2,2,2 note 6 (1+1+2+2)
  */
-class TwoPairStrategy extends AbstractStrategy implements ScoreStrategy {
+class TwoPairStrategy implements ScoreStrategy {
 
-    public static final int TWO_PAIR_NO_SCORE = 0;
-    public static final int PAIR = 2;
+    private static final int TWO_PAIR_NO_SCORE = 0;
+    private static final int PAIR = 2;
 
     @Override
-    public int compute(PlayerSet set) {
-        increaseRowByOne(set);
+    public int compute(PlayerSet playerSet) {
+        List<Integer> pairs = IntStream.range(1, 7)
+            .filter(integer -> playerSet.getCountDiceByValue()[integer - 1] >= PAIR)
+            .boxed()
+            .collect(Collectors.toList());
 
-        ArrayList<Integer> pairs = Stream.of(1, 2, 3, 4, 5, 6)
-                .filter(integer -> tallies[integer - 1] >= PAIR)
-                .collect(Collectors.toCollection(ArrayList::new));
-
-        if(pairs.size() == PAIR){
-            return pairs.stream().reduce(0, (a, b) -> a + b * 2);
-        } else{
-            return TWO_PAIR_NO_SCORE;
-        }
+        return pairs.size() == PAIR ? pairs.stream().reduce(0, (a, b) -> a + b * 2) : TWO_PAIR_NO_SCORE;
     }
 }

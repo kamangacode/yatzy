@@ -1,12 +1,7 @@
 package fr.muludiki.yatzy.domain.strategies;
 
 import fr.muludiki.yatzy.domain.PlayerSet;
-
-import java.util.ArrayList;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-import static fr.muludiki.yatzy.domain.strategies.TwoPairStrategy.PAIR;
+import java.util.stream.IntStream;
 
 /**
  * Si les dés sont un carre et un brelan, le joueur marque la somme de tous les dés.
@@ -16,28 +11,24 @@ import static fr.muludiki.yatzy.domain.strategies.TwoPairStrategy.PAIR;
  * 2,2,3,3,4 notes 0
  * 4,4,4,4,4 notes 0
  */
-class FullHouseStrategy extends AbstractStrategy implements ScoreStrategy {
-    public static final int FULL_HOUSE_NO_SCORE = 0;
-    public static final int PAIR = 2;
+class FullHouseStrategy implements ScoreStrategy {
+
+    private static final int FULL_HOUSE_NO_SCORE = 0;
+    private static final int PAIR = 2;
     private static final int THREES = 3;
 
     @Override
     public int compute(PlayerSet playerSet) {
+        int pairs = IntStream.range(1, 7)
+            .filter(integer -> playerSet.getCountDiceByValue()[integer - 1] == PAIR)
+            .findFirst()
+            .orElse(0);
 
-        increaseRowByOne(playerSet);
+        int threes = IntStream.range(1, 7)
+            .filter(integer -> playerSet.getCountDiceByValue()[integer - 1] == THREES)
+            .findFirst()
+            .orElse(0);
 
-        int pairs = Stream.of(1, 2, 3, 4, 5, 6)
-                .filter(integer -> tallies[integer - 1] == PAIR)
-                .findFirst().orElse(0);
-
-        int threes = Stream.of(1, 2, 3, 4, 5, 6)
-                .filter(integer -> tallies[integer - 1] == THREES)
-                .findFirst().orElse(0);
-
-        if (pairs > 0 && threes > 0){
-            return pairs * 2 + threes * 3;
-        } else {
-            return FULL_HOUSE_NO_SCORE;
-        }
+        return pairs > 0 && threes > 0 ? pairs * 2 + threes * 3 : FULL_HOUSE_NO_SCORE;
     }
 }

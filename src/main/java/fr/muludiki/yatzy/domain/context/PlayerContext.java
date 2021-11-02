@@ -2,20 +2,17 @@ package fr.muludiki.yatzy.domain.context;
 
 import fr.muludiki.yatzy.domain.Player;
 import fr.muludiki.yatzy.domain.PlayerSet;
-import fr.muludiki.yatzy.domain.strategies.ScoreStrategy;
 
 public interface PlayerContext {
 
-    void setCurrentPlayer(Player c);
     Player currentPlayer();
-
-    void setCurrentSet(PlayerSet s);
     PlayerSet currentSet();
 
-    boolean isCategoryAvailable(String category);
+    void setCurrentSet(PlayerSet s);
 
-    void setCurrentStrategy(ScoreStrategy scoreStrategy);
-    ScoreStrategy currentStrategy();
+    void setCurrentPlayer(Player c);
+
+    boolean isCategoryAvailable(String category);
 
     void deactiveCategory(String category);
 
