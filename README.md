@@ -1,4 +1,4 @@
-# Implémentation du Kata Yatzy en BDD-TDD-DDD et Clean architecture
+# Implémentation du Kata Yatzy en BDD-TDD-DDD et SOLID
 Source code of this video: https://github.com/emilybache/Yatzy-Refactoring-Kata
 
 # Lancement des tests d'acceptance
